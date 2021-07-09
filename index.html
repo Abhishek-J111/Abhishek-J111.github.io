@@ -9,16 +9,40 @@
         </style>
     </head>
 <body>
-    <div class = "main">
+    <div id ="loading">
+        loading...
+    </div>
+    <div class = "main" id="mainContainer" hidden>
         <img 
-        src="https://avatars.githubusercontent.com/u/44140921?v=4"
+       id="profilepic"
         height="100"
         width="100"
     >
-    <h2>Abhishek Joshi</h2>
-    <p>I have been followed by 17 people</p>
+    <h2 id="fullName"></h2>
+    <p id="bio"></p>
+    <h5 id="followersInformation"></h5>
+    <p>
+        Check me on <a id="GithubLink">github</a>
+    </p>
+    <a class="twitter-timeline" data-lang="en" data-width="300" data-height="400" data-theme="dark" href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
-    
+    <script>
+        fetch("https://api.github.com/users/Abhishek-J111").
+        then(response => response.json())
+        .then(function(data) {
+            // console.log(data)
+            let followersCount = data['followers']
+            console.log(followersCount)
+            let followersText = 'I have been followed by ${followersCount} awesome people in Github'
+            document.getElementById('profilepic').src = data['avatar_url']
+            document.getElementById("fullName").textContent = data['name']
+            document.getElementById("bio").textContent = data['bio']
+            document.getElementById("followersInformation").textContent = followersText
+            document.getElementById("GithubLink").href = data['html_url']
+            document.getElementById("mainContainer").hidden = false
+            document.getElementById("loading").hidden = true
+        })
+    </script>
 
 </body>
 </html>
