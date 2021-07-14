@@ -19,21 +19,24 @@
     /* background-image: url("/home/abhishek/Desktop/1.jpeg"); */
     background-repeat: no-repeat;
     background-size: contain;
+    height: max-content;
 }
 #tools{
     position: absolute;
     left: 40%;
     top: 25%;
 }
+/* #table_div{
+  position:absolute;
+  left: 40%;
+  top: 45%;
+} */
         </style>
     </head>
 <body id='body1'>
     <div> <p align ='left'>
         <h1>Hello World!
         <img width="30" height="30" src="https://user-images.githubusercontent.com/44140921/119137937-0e555700-ba61-11eb-8bd8-c4cf32f9e005.gif"></h1></p></div>
-      
-      
-      
       <p >
         <p align = "left">
  <h1 id="fullName"></h1>
@@ -71,40 +74,54 @@
         <img width="460" height="300" src="https://github-readme-stats.vercel.app/api?username=Abhishek-J111&show_icons=true&theme=radical&count_private=true">
       </p>
       <p>
-          <h2>Here is List to my Github repos</h2>
-          <ul id="list"></ul>
-      </p>
+        <div id="table_div">
+          <h2>Project List</h2>
+          <table>
+            <tr>
+              <th>Repository Name</th>
+              <th>Private</th>
+              <th>HTML URL</th>
+            </tr>
+            <tbody id = "content">
+            
+            </tbody>
+          </table>
+        </p>
+        </div>
+  
     </div>
     <script>
         fetch("https://api.github.com/users/Abhishek-J111").
         then(response => response.json())
         .then(function(data) {
             // console.log(data)
-            let followersCount = data['followers']
-            console.log(followersCount)
-            let followersText = 'I have been followed by ${followersCount} awesome people in Github'
             document.getElementById('profilepic').src = data['avatar_url']
             document.getElementById("fullName").textContent = data['name']
             document.getElementById("bio").textContent = data['bio']
-            document.getElementById("followersInformation").textContent = followersText
-            document.getElementById("GithubLink").href = data['html_url']
-            document.getElementById("mainContainer").hidden = false
-            document.getElementById("loading").hidden = true
         })
-    </script>
-    <script>
+    
+   
         fetch("https://api.github.com/users/Abhishek-J111/repos").
         then(response =>response.json())
         .then(function(data1){
             console.log(typeof data1);
-            length_array = data1.length;
-            const proj_list=[]
-            for (let i= 0; i< length_array;i++){
-                proj_list[i]= data1[i]["name"];
-            }
-            document.getElementById('list').textContent= proj_list
-            console.log(proj_list)
+              items =[]
+            for (var i =0; i< data1.length; i++){
+                    items.push(`
+                    <tr>
+                    <td>${data1[i].name}</td>
+                    <td>${data1[i].private}</td>
+                    <td>${data1[i].html_url}</td>
+                    </tr>`)
+                }
+                console.log(items);
+                var list = document.getElementById('content');
+                list.innerHTML = items.join("");
+           
         })
+
+       
+
     </script>
 
 </body>
