@@ -14,6 +14,23 @@
   top: 5px;
 
 }
+
+#table_div td, #table_div th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table_div tr:nth-child(even){background-color: #f2f2f2;}
+
+#table_div tr:hover {background-color: #ddd;}
+
+#table_div th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
 #body1{
     background-image: linear-gradient(to bottom right,#43cea2, #185a9d);
     /* background-image: url("/home/abhishek/Desktop/1.jpeg"); */
@@ -26,11 +43,7 @@
     left: 40%;
     top: 25%;
 }
-/* #table_div{
-  position:absolute;
-  left: 40%;
-  top: 45%;
-} */
+
         </style>
     </head>
 <body id='body1'>
@@ -74,9 +87,9 @@
         <img width="460" height="300" src="https://github-readme-stats.vercel.app/api?username=Abhishek-J111&show_icons=true&theme=radical&count_private=true">
       </p>
       <p>
-        <div id="table_div">
+        <div >
           <h2>Project List</h2>
-          <table>
+          <table id="table_div">
             <tr>
               <th>Repository Name</th>
               <th>Private</th>
